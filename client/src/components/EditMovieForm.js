@@ -6,6 +6,17 @@ import axios from 'axios';
 
 const EditMovieForm = (props) => {
 	const { push } = useHistory();
+  const { id } = useParams();
+
+  // console.log(props)
+
+  // Upon loading grabs the selected movie and populates the form so it can be edited
+  useEffect(()=>{
+    axios.get(`http://localhost:5000/api/movies/${id}`)
+      .then(res=>{
+        setMovie(res.data);
+      });
+  }, []);
 
 	const [movie, setMovie] = useState({
 		title:"",
@@ -24,6 +35,14 @@ const EditMovieForm = (props) => {
 
     const handleSubmit = (e) => {
 		e.preventDefault();
+    axios.put(`http://localhost:5000/api/movies/${id}`, movie)
+      .then(res => {
+        console.log("Item edited", res)
+        props.setMovies(res.data)
+        push('/movies')
+
+      })
+      .catch(err => console.log(err))
 	}
 	
 	const { title, director, genre, metascore, description } = movie;
