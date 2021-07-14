@@ -28,19 +28,21 @@ const App = (props) => {
         console.log(err);
       });
   }, []);
-
+  
   
   const deleteMovie = (id)=> {
-   const movies = movies.filter((movie) => 
-         movie.id !== id
-        
+     
+      setMovies(
+      
+        movies.filter((movie) => 
+        movie.id !== id)
+     
       )
-      // console.log(movies)
-      // setMovies(movies)
-      // push('/movies')
+    
+      push('/movies')
   }
   
-
+  console.log(movies )
   const addToFavorites = (movie) => {
     
   }
@@ -57,7 +59,7 @@ const App = (props) => {
           <FavoriteMovieList favoriteMovies={favoriteMovies}/>
         
           <Switch>
-            <Route path="/movies/add/:id">
+            <Route path="/movies/add/">
               <AddMovieForm setMovies={setMovies} />
             </Route>
 
@@ -66,7 +68,7 @@ const App = (props) => {
             </Route>
 
             <Route path="/movies/:id">
-              <Movie deleteMovie={deleteMovie} setMovies={setMovies}/>
+              <Movie key={id} deleteMovie={deleteMovie} />
             </Route>
 
             <Route path="/movies">
