@@ -6,6 +6,7 @@ import FavoriteMovieList from './FavoriteMovieList';
 
 const MovieList = (props)=> {
     const { movies, favoriteMovies } = props;
+    console.log(movies)
 
     return (
         <div className="col">
@@ -22,7 +23,7 @@ const MovieList = (props)=> {
 
                 <tbody>
                     {
-                        movies.map(movie=><MovieListItem key={movie.id} movie={movie}/>)
+                      movies.map(movie=><MovieListItem key={movie.id} movie={movie}/>)
                     }
                 </tbody>
             </table>
